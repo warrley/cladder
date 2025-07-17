@@ -1,0 +1,5 @@
+{word: arroz, tip: comida}
+{word: banana, tip: comida}
+{word: feijao, tip: comida}
+{word: jogo, tip: divertido}
+{word: peixe, tip: agua}
