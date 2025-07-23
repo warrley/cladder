@@ -58,4 +58,3 @@ int verifyWord(char guess[], char correct[]) {
 // precisa ser aleatório?
 // precisa de tempo?
 // precisar ter avisos de erro?
-//

@@ -1,5 +1,27 @@
-{word: arroz, tip: comida}
-{word: banana, tip: comida}
-{word: feijao, tip: comida}
-{word: jogo, tip: divertido}
-{word: peixe, tip: agua}
+[
+	id:0
+	level:2
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+]
+[
+	id:0
+	level:3
+	{word: a, tip: d}
+	{word: a, tip: d}
+	{word: a, tip: d}
+	{word: a, tip: d}
+	{word: a, tip: d}
+]
+[
+	id:0
+	level:3
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+	{word: a, tip: b}
+]
