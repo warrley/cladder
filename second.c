@@ -3,7 +3,6 @@
 #include "awtils.h"
 
 struct Word {
-	int id;
 	char string[word_len + 1];
 	char tip[tip_len + 1];
 };
@@ -11,6 +10,7 @@ struct Word {
 typedef struct Word word;
 
 void insertWords(word *words, char *initial, char *level);
+void writeFile(word *words, char *initial, char level);
 
 int main() {
 	char initial[word_len + 1];
@@ -19,23 +19,7 @@ int main() {
 	
 	insertWords(words, initial, &level);
 
-	FILE *save = fopen("palavras.txt", "a");
-	
-	if(!save) {
-	    printf("erro ao abrir o arquv");
-	    exit(1);
-	}
-
-	fprintf(save, "[\n\tid: %d\n\tlevel: %c\n\theader: %s\n", 0, level, initial);
-
-	for(int i = 0; i < num_word; i++) {
-        fprintf(save, "\t{word: %s, tip: %s}\n", words[i].string, words[i].tip);
-    }
-
-	fprintf(save, "]\n");
-	
-	fclose(save);
-	printf("palavras salvas com sucesso");
+	writeFile(words, initial, level);
 
 	return 0;
 };
@@ -67,4 +51,22 @@ void insertWords(word *words, char *initial, char *level) {
 		else 					   break;
 	}
 	*level = copyLevel;
+};
+
+void writeFile(word *words, char *initial, char level){
+	FILE *save = fopen("palavras.txt", "a");
+	if(!save) {
+		printf("erro ao abrir o arquv");
+		exit(1);
+	}
+	fprintf(save, "[\n\tid: %d\n\tlevel: %c\n\theader: %s\n", 0, level, initial);
+
+	for(int i = 0; i < num_word; i++) {
+		fprintf(save, "\t{word: %s, tip: %s}\n", words[i].string, words[i].tip);
+	}
+
+	fprintf(save, "]\n");
+	
+	fclose(save);
+	printf("palavras salvas com sucesso");
 };
