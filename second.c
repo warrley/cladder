@@ -10,11 +10,11 @@ struct Word {
 
 typedef struct Word word;
 
-void insertWords(word *words, char *initial, int *level);
+void insertWords(word *words, char *initial, char *level);
 
 int main() {
 	char initial[word_len + 1];
-	int level;
+	char level;
 	word words[num_word];
 	
 	insertWords(words, initial, &level);
@@ -26,7 +26,7 @@ int main() {
 	    exit(1);
 	}
 
-	fprintf(save, "[\n\tid: %d\n\tlevel: %d\n\theader: %s\n", 0, level, initial);
+	fprintf(save, "[\n\tid: %d\n\tlevel: %c\n\theader: %s\n", 0, level, initial);
 
 	for(int i = 0; i < num_word; i++) {
         fprintf(save, "\t{word: %s, tip: %s}\n", words[i].string, words[i].tip);
@@ -40,7 +40,7 @@ int main() {
 	return 0;
 };
 
-void insertWords(word *words, char *initial, int *level) {
+void insertWords(word *words, char *initial, char *level) {
 	printf("digite a palavra inicial: ");
 	scanf(" %s", initial);
 	
@@ -56,14 +56,14 @@ void insertWords(word *words, char *initial, int *level) {
 		scanf(" %[^\n]", words[i].tip);
 	}
 	
-	int copyLevel;
+	char copyLevel;
 	printf("\nescolha o nivel de dificuldade desse bloco de palavras");
 	while(1) {
 		printf("\n[1] - Fácil");
 		printf("\n[2] - Médio");
 		printf("\n[3] - Difícil\n");
-		scanf("%d", &copyLevel);
-		if(copyLevel < 1 || copyLevel > 3) printf("escolha um nivel valido.");
+		scanf(" %c", &copyLevel);
+		if(copyLevel < '1' || copyLevel > '3') printf("escolha um nivel valido.");
 		else 					   break;
 	}
 	*level = copyLevel;
