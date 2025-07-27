@@ -77,7 +77,7 @@ char choose() {
     while(1) {
         printf(BOLD_BLUE "> " RESET);
         scanf(" %c", &choice);
-        while (getchar() != '\n');  limpa o buffer para pegar apenas a primeira letra
+        while (getchar() != '\n');  // limpa o buffer para pegar apenas a primeira letra
         if(choice < '1' || choice > '3') printf(BOLD_RED "Nível inválido. Tente novamente.\n" RESET);
         else                             break;
     };
