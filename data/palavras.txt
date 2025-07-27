@@ -1,7 +1,7 @@
 [
 	id: 0
 	level: 2
-	base: balaaaaaaaaaaaaaaaaaa
+	base: bola
 	{word: bola, tip: redonda}
 	{word: cola, tip: gruda}
 	{word: colo, tip: bebê gosta}
