@@ -7,11 +7,11 @@ char choose();
 int main() {
     animation();
     char play = 's';
+    srand(time(NULL));
     
     while (play == 'S' || play == 's') {
         showInstructions();
 
-        srand(time(NULL));
         char choice = choose();
 
         disable();
@@ -49,9 +49,9 @@ void showInstructions() {
     printf(BOLD_CYAN "║                                                                     ║\n" RESET);
     printf(BOLD_CYAN "║" RESET " Você ganha pontos por cada acerto!                                  " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "║                                                                     ║\n" RESET);
-    printf(BOLD_CYAN "║" BOLD_WHITE " RESTRIÇÕES:                                                         " BOLD_CYAN "║\n" RESET);
-    printf(BOLD_CYAN "║" RESET " 1. Todas as palavras devem ter ao máximo %d letras                  " BOLD_CYAN "║\n" RESET, word_len);
-    printf(BOLD_CYAN "║" RESET " 2. Não são permitidas palavras com acentos ou caracteres especiais  " BOLD_CYAN "║\n" RESET);
+    printf(BOLD_CYAN "║" BOLD_RED " ATENÇÃO:                                                            " BOLD_CYAN "║\n" RESET);
+    printf(BOLD_CYAN "║" RESET " - Todas as palavras devem ter ao máximo %d letras                  " BOLD_CYAN "║\n" RESET, word_len);
+    printf(BOLD_CYAN "║" RESET " - Não são permitidas palavras com acentos ou caracteres especiais  " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "╚═════════════════════════════════════════════════════════════════════╝\n" RESET);
     
     printf("\n\n" BOLD_BLUE "Pressione qualquer tecla para continuar..." RESET);
@@ -86,7 +86,6 @@ char choose() {
 };
 
 void playGame(char difficulty) {
-    srand(time(NULL));
     FILE *file = fopen(data_path, "r");
     if (!file) {
         printf(BOLD_RED "╔════════════════════════════════╗\n" RESET);

@@ -51,14 +51,12 @@ char *awfind(char *text, char *search) {
 //verificar se a palavra é valida
 int verifyWord(word *words, char *initial, int index) {
     char *reference = (index == 0) ? initial : words[index-1].string;
-    if(!diffLetter(words[index].string, reference)) {
-        return 0;
-    };
+    if(!diffLetter(words[index].string, reference)) return 0;
     
     for (int i = 0; i < num_word; i++) {
         if (index == i) continue;
         if (awcmp(words[index].string, words[i].string) == 0 || awcmp(words[index].string, initial) == 0) {
-            printf("a palavra %s ja esta no jogo\n", words[i].string);
+            printf("A palavra %s ja esta no jogo.\n", words[i].string);
             return 0;
         };
     };
@@ -69,7 +67,7 @@ int verifyWord(word *words, char *initial, int index) {
 //quantas letras diferentes
 int diffLetter(char *word1, char *word2) {
     if(awlen(word1) != awlen(word2)) {
-        printf("as palavras devem ter o mesmo tamanho\n");
+        printf("As palavras devem ter o mesmo tamanho.\n");
         return 0;
     };
 
@@ -79,19 +77,14 @@ int diffLetter(char *word1, char *word2) {
     };
 
     if(diff == 0) {
-        printf("a palavra %s ja esta no jogo\n", word2);
+        printf(BOLD_RED "A palavra %s ja esta no jogo.\n" RESET, word2);
         return 0;
     } else if(diff > 1) {
-        printf("apenas uma letra deve ser diferente de %s\n", word2);
+        printf("Apenas uma letra deve ser diferente de %s.\n", word2);
         return 0;
     };
 
     return 1;
-};
-
-//limpar tela
-void clearScreen() {
-    system("clear || cls");
 };
 
 //pegar o ultimo id
@@ -99,25 +92,25 @@ int lastId() {
     FILE *file = fopen(data_path, "r");
     if (file == NULL) {
         return 0;
-    }
-
+    };
+    
     int max_id = -1;
-    char line[545];
-
+    char line[max_line];
+    
     while (fgets(line, sizeof(line), file)) {
         if (awfind(line, "id:")) {
             int current_id;
             if (sscanf(line, "\tid: %d", &current_id) == 1) {
                 if (current_id > max_id) {
                     max_id = current_id;
-                }
-            }
-        }
-    }
-
+                };
+            };
+        };
+    };
+    
     fclose(file);
     return max_id;
-}
+};
 
 //passar para letras minusculas
 char *toLower(char *str) {
@@ -127,6 +120,11 @@ char *toLower(char *str) {
         };
     };
     return str;
+};
+
+//limpar tela
+void clearScreen() {
+    system("clear || cls");
 };
 
 //animacao
@@ -162,7 +160,7 @@ void animation() {
         usleep(50000 + rand() % 100000);
     }
     
-    printf("\n\n%s%s                Bem Vindo!\n" RESET, BOLD, GREEN);
+    printf("\n\n%s%s           Bem Vindo Filho!\n" RESET, BOLD, GREEN);
     sleep(1);
     clearScreen();
     enable();

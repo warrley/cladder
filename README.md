@@ -8,7 +8,6 @@ Jogo de terminal onde o objetivo é transformar uma palavra em outra alterando u
 ### Pré-requisitos
 - Compilador GCC instalado
 - Terminal que suporte cores ANSI
-- Linux/macOS ou Windows (com WSL/Git Bash)
 
 ### Instalação e Compilação
 ```bash
