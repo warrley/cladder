@@ -1,7 +1,7 @@
 [
 	id: 0
 	level: 2
-	base: bala
+	base: balaaaaaaaaaaaaaaaaaa
 	{word: bola, tip: redonda}
 	{word: cola, tip: gruda}
 	{word: colo, tip: bebê gosta}
@@ -15,4 +15,13 @@
 	{word: mama, tip: caracteristica mamifero}
 	{word: mala, tip: carrega coisas}
 	{word: maia, tip: civilizacao antiga}
+]
+[
+	id: 2
+	level: 1
+	base: gato
+	{word: pato, tip: animal que voa, nada e anda}
+	{word: pata, tip: pé de animal}
+	{word: pate, tip: comida}
+	{word: cate, tip: pegar}
 ]

@@ -47,4 +47,4 @@ chmod +x build.sh
 	{word: maia, tip: civilizacao antiga}
 ]
 ```
-### O arquivo txt não deve em hipótese alguma ser alterado manualmente, isso pode alterar o correto funcionalmente do programa.
+### O arquivo txt não deve em hipótese alguma ser alterado manualmente, isso pode alterar o correto funcionamento do programa.

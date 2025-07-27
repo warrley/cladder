@@ -7,8 +7,8 @@
 #include <time.h>
 #include <termios.h>
 
-#define word_len 45
-#define tip_len 45
+#define word_len 30
+#define tip_len 40
 #define num_word 4
 #define max_line (word_len + tip_len + 17)
 #define data_path "data/palavras.txt"

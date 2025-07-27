@@ -131,10 +131,10 @@ char *toLower(char *str) {
 
 //animacao
 void animation() {
+    disable();
     clearScreen();
     printf("\n\n\n");
     
-    // Logo com degradê usando suas cores definidas
     printf("%s%s       █████╗ %s ██╗    ██╗ %s ██████╗██╗     %s ██████╗ \n" RESET, 
           BOLD, RED, YELLOW, GREEN, BLUE);
     printf("%s%s      ██╔══██╗%s ██║    ██║%s ██╔════╝██║     %s ██╔══██╗\n" RESET,
@@ -149,10 +149,8 @@ void animation() {
           BOLD, RED, YELLOW, GREEN, BLUE);
     printf("\n");
     
-    // Barra de progresso colorida
     printf("        ");
     for(int i = 0; i < 30; i++) {
-        // Alterna entre cores para a barra de progresso
         if(i < 5) printf("%s▓" RESET, RED);
         else if(i < 10) printf("%s▓" RESET, YELLOW);
         else if(i < 15) printf("%s▓" RESET, GREEN);
@@ -164,10 +162,10 @@ void animation() {
         usleep(50000 + rand() % 100000);
     }
     
-    // Mensagem de boas-vindas
     printf("\n\n%s%s                Bem Vindo!\n" RESET, BOLD, GREEN);
     sleep(1);
     clearScreen();
+    enable();
 };
 
 //desativar o teclado no terminal

@@ -186,15 +186,15 @@ void playGame(char difficulty) {
             printf(BOLD_CYAN "╔══════════════════════════════════════════════════╗\n" RESET);
             printf(BOLD_CYAN "║ Palavra anterior: " RESET "%-30s " BOLD_CYAN "║\n" RESET, (i == 0) ? base : words[i-1].string);
             printf(BOLD_CYAN "╠══════════════════════════════════════════════════╣\n" RESET);
-            printf(BOLD_CYAN "║ Dica: " RESET "%-42s " BOLD_CYAN "║\n" RESET, words[i].tip);
-            printf(BOLD_CYAN "║ Palavra: " RESET "%-39s " BOLD_CYAN "║\n" RESET, masked);
+            printf(BOLD_CYAN "║ Dica: " RESET "%-40s   " BOLD_CYAN "║\n" RESET, words[i].tip);
+            printf(BOLD_CYAN "║ Palavra: " RESET "%-30s          " BOLD_CYAN "║\n" RESET, masked);
             printf(BOLD_CYAN "╚══════════════════════════════════════════════════╝\n" RESET);
         }
         else {
             printf(BOLD_CYAN "╔══════════════════════════════════════════════════╗\n" RESET);
             printf(BOLD_CYAN "║ Palavra anterior: " RESET "%-30s " BOLD_CYAN "║\n" RESET, (i > 0) ? words[i-1].string : base);
             printf(BOLD_CYAN "╠══════════════════════════════════════════════════╣\n" RESET);
-            printf(BOLD_CYAN "║ Dica: " RESET "%-42s " BOLD_CYAN "║\n" RESET, words[i].tip);
+            printf(BOLD_CYAN "║ Dica: " RESET "%-40s   " BOLD_CYAN "║\n" RESET, words[i].tip);
             printf(BOLD_CYAN "╚══════════════════════════════════════════════════╝\n" RESET);
         };
 
@@ -206,7 +206,7 @@ void playGame(char difficulty) {
             printf(BOLD_CYAN "║                   " BOLD_GREEN "✓ Correto!" RESET "                     " BOLD_CYAN "║\n" RESET);
             score++;
         } else {
-            printf(BOLD_CYAN "║ " BOLD_RED "✗ Errado! Era: " RESET "%-33s " BOLD_CYAN "║\n" RESET, words[i].string);
+            printf(BOLD_CYAN "║ " BOLD_RED "✗ Errado! Era: " RESET "%-30s   " BOLD_CYAN "║\n" RESET, words[i].string);
         }
         printf(BOLD_CYAN "╚══════════════════════════════════════════════════╝\n" RESET);
         
@@ -214,7 +214,7 @@ void playGame(char difficulty) {
         sleep(2);
         enable();
         clearScreen();
-        awcpy(previous, words[i].string);
+        awcpy(previous, words[i].string); // previous vira a palavra, que em um segundo momento vai ser a palavra anterior
     }
 
     printf(BOLD_CYAN "╔══════════════════════════════════════════════════╗\n" RESET);
