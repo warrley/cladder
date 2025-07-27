@@ -77,7 +77,7 @@ char choose() {
     while(1) {
         printf(BOLD_BLUE "> " RESET);
         scanf(" %c", &choice);
-        while (getchar() != '\n');
+        while (getchar() != '\n');  limpa o buffer para pegar apenas a primeira letra
         if(choice < '1' || choice > '3') printf(BOLD_RED "Nível inválido. Tente novamente.\n" RESET);
         else                             break;
     };
@@ -104,6 +104,7 @@ void playGame(char difficulty) {
     char current_level;
     int current_id;
 
+    // pega todos os blocos validos para o nivel escolhido
     while (fgets(line, sizeof(line), file)) {
         if (awfind(line, "id:")) {
             sscanf(line, "\tid: %d", &current_id);
@@ -128,6 +129,7 @@ void playGame(char difficulty) {
         exit(1);
     };
 
+    // sortea um id valido
     int target_id = valid_ids[rand() % num_valid_ids];
     rewind(file);
 
@@ -137,6 +139,7 @@ void playGame(char difficulty) {
     char level;
     int found = 0;
 
+    // armazena as informacoes do bloco sorteado
     while (fgets(line, sizeof(line), file) && !found) {
         if (awfind(line, "id:")) {
             int id;
@@ -160,26 +163,23 @@ void playGame(char difficulty) {
 
     int score = 0;
     char previous[word_len + 1];
-    awcpy(previous, base);
+    awcpy(previous, base); // o previous comeca sendo a palavra base
 
     for (int i = 0; i < word_count; i++) {
         printf(CYAN "╔══════════════════════════════════════════════════╗\n" RESET);
         printf(CYAN "║                                                  ║\n" RESET);
-        printf(CYAN "║   Nível: %-12s         %02d de %02d palavras   ║\n" RESET,
-            (difficulty == '1') ? "Fácil" : 
-            (difficulty == '2') ? "Médio" : "Difícil",
-            i+1, num_word);
+        printf(CYAN "║   Nível: %-12s         %02d de %02d palavras   ║\n" RESET, (difficulty == '1') ? "Fácil" : (difficulty == '2') ? "Médio" : "Difícil",i+1, num_word);
         printf(CYAN "║                                                  ║\n" RESET);
         printf(CYAN "╚══════════════════════════════════════════════════╝\n" RESET);
         
         char guess[word_len + 1];
         char masked[word_len + 1];
-        awcpy(masked, words[i].string);
+        awcpy(masked, words[i].string); // copia a palavra na mascara
 
         if (difficulty == '1') {
             for (int j = 0; j < awlen(previous); j++) {
                 if (previous[j] != words[i].string[j]) {
-                    masked[j] = '_';
+                    masked[j] = '_'; // substitui a letra diferente na mascara
                     break;
                 };
             };

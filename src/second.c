@@ -38,7 +38,7 @@ void showInstructions() {
     clearScreen();
     
     printf(BOLD_CYAN "╔══════════════════════════════════════════════════════════════╗\n" RESET);
-    printf(BOLD_CYAN "║" BOLD_YELLOW "                         INSTRUÇÕES DO MODO CADASTRO          " BOLD_CYAN "║\n" RESET);
+    printf(BOLD_CYAN "║" BOLD_YELLOW "                  INSTRUÇÕES DO MODO CADASTRO                 " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "╠══════════════════════════════════════════════════════════════╣\n" RESET);
     printf(BOLD_CYAN "║" RESET " Você vai criar um conjunto de palavras para o jogo.          " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "║" RESET " Siga cuidadosamente estas regras:                            " BOLD_CYAN "║\n" RESET);
@@ -52,9 +52,9 @@ void showInstructions() {
     printf(BOLD_CYAN "║" RESET "    Fácil: Palavras comuns | Difícil: Palavras complexas      " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "║" RESET "                                                              " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "║" RESET " " BOLD_RED "ATENÇÃO:" RESET "                                                     " BOLD_CYAN "║\n" RESET);
-    printf(BOLD_CYAN "║" RESET " - Todas as palavras devem ter ao máximo %d letras            " BOLD_CYAN "║\n" RESET, word_len);
-    printf(BOLD_CYAN "║" RESET " - Todas as dicas devem ter ao máximo %d letras               " BOLD_CYAN "║\n" RESET, tip_len);
-    printf(BOLD_CYAN "║" RESET " - Não são permitidos acentos ou caracteres especiais         " BOLD_CYAN "║\n" RESET);
+    printf(BOLD_CYAN "║" RESET " - As palavras devem ter ao máximo %d letras e sem espaços    " BOLD_CYAN "║\n" RESET, word_len);
+    printf(BOLD_CYAN "║" RESET " - As dicas devem ter ao máximo %d letras                     " BOLD_CYAN "║\n" RESET, tip_len);
+    printf(BOLD_CYAN "║" RESET " - Não são permitidos acentos caracteres especiais            " BOLD_CYAN "║\n" RESET);
     printf(BOLD_CYAN "╚══════════════════════════════════════════════════════════════╝\n" RESET);
     
     printf("\n\n" BOLD_BLUE "Pressione qualquer tecla para começar o cadastro..." RESET);
@@ -82,6 +82,7 @@ void insertWords(word *words, char *initial, char *level) {
     sleep(3);
     enable();
 
+    //loop para adicionar palavras
     for(int i = 0; i < num_word; i++) {
         clearScreen();
         
@@ -91,8 +92,7 @@ void insertWords(word *words, char *initial, char *level) {
         
         do {
             printf(CYAN "╔════════════════════════════════════════════════════════╗\n" RESET);
-            printf(CYAN "║ Digite uma palavra que difere em 1 letra de %-11s" CYAN "║\n" RESET, 
-                  (i == 0) ? initial : words[i-1].string);
+            printf(CYAN "║ Digite uma palavra que difere em 1 letra de %-11s" CYAN "║\n" RESET, (i == 0) ? initial : words[i-1].string);
             printf(CYAN "╚════════════════════════════════════════════════════════╝\n" RESET);
             printf(BOLD "> " RESET);
             char str[word_len];
@@ -103,9 +103,10 @@ void insertWords(word *words, char *initial, char *level) {
             sleep(1);
             enable();
             clearScreen();
-        } while(!verifyWord(words, initial, i));
+        } while(!verifyWord(words, initial, i)); // verifica se a palavra pode ser adicionada
     }
     
+    //loop para adicionar as dicas
     for(int i = 0; i < num_word; i++) {
         clearScreen();
         printf(BLUE "╔══════════════════════════════════════════════════╗\n" RESET);
@@ -133,7 +134,7 @@ void insertWords(word *words, char *initial, char *level) {
         printf(YELLOW "╚══════════════════════════════════════════════════╝\n" RESET);
         printf(BOLD "> " RESET);
         scanf(" %c", level);
-        while (getchar() != '\n');
+        while (getchar() != '\n'); // limpa o buffer para pegar apenas a primeira letra
         
         if(*level < '1' || *level > '2') {
             printf(RED "╔══════════════════════════════════════════════════╗\n" RESET);
@@ -163,6 +164,9 @@ void writeFile(word *words, char *initial, char level) {
         fprintf(save, "\t{word: %s, tip: %s}\n", words[i].string, words[i].tip);
     }
 
+    fprintf(save, "]\n");
+    fclose(save);
+    
     sleep(1);
     clearScreen();
 
@@ -170,6 +174,4 @@ void writeFile(word *words, char *initial, char level) {
     printf(GREEN "║" BOLD "       PALAVRAS SALVAS COM SUCESSO! ID: %-4d      " GREEN "║\n" RESET, lastId());
     printf(GREEN "╚══════════════════════════════════════════════════╝\n" RESET);
 
-    fprintf(save, "]\n");
-    fclose(save);
 }
