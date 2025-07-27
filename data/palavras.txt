@@ -1,0 +1,18 @@
+[
+	id: 0
+	level: 2
+	base: bala
+	{word: bola, tip: redonda}
+	{word: cola, tip: gruda}
+	{word: colo, tip: bebe gosta}
+	{word: dolo, tip: juridico}
+]
+[
+	id: 1
+	level: 1
+	base: lama
+	{word: dama, tip: jogo tabuleiro}
+	{word: mama, tip: caracteristica mamifero}
+	{word: mala, tip: carrega coisas}
+	{word: maia, tip: civilizacao antiga}
+]
