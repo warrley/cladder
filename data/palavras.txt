@@ -5,7 +5,7 @@
 	{word: bola, tip: redonda}
 	{word: cola, tip: gruda}
 	{word: colo, tip: bebe gosta}
-	{word: dolo, tip: juridico}
+	{word: dolo, tip: intencao no meio juridico}
 ]
 [
 	id: 1

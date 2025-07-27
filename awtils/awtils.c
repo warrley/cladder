@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
-#include <termios.h>
 #include "awtils.h"
 
 //tamanho string
@@ -62,8 +57,8 @@ int verifyWord(word *words, char *initial, int index) {
     
     for (int i = 0; i < num_word; i++) {
         if (index == i) continue;
-        if (awcmp(words[index].string, words[i].string) == 0) {
-            printf("a palavara %s ja esta no jogo\n", words[i].string);
+        if (awcmp(words[index].string, words[i].string) == 0 || awcmp(words[index].string, initial) == 0) {
+            printf("a palavra %s ja esta no jogo\n", words[i].string);
             return 0;
         };
     };
@@ -101,7 +96,7 @@ void clearScreen() {
 
 //pegar o ultimo id
 int lastId() {
-    FILE *file = fopen("palavras.txt", "r");
+    FILE *file = fopen(data_path, "r");
     if (file == NULL) {
         return 0;
     }
@@ -124,35 +119,53 @@ int lastId() {
     return max_id;
 }
 
-// char* toLower(char *str) {
-//     for (int i = 0; str[i] != '\0'; i++) {
-//         if (str[i] >= 'A' && str[i] <= 'Z') {
-//             str[i] = str[i] + 32;
-//         }
-//     }
-//     return *str;
-// }
+//passar para letras minusculas
+char *toLower(char *str) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= 'A' && str[i] <= 'Z') {
+            str[i] += 32;
+        };
+    };
+    return str;
+};
 
 //animacao
 void animation() {
     clearScreen();
     printf("\n\n\n");
-    printf("       █████╗ ██╗    ██╗ ██████╗██╗     ██████╗ \n");
-    printf("      ██╔══██╗██║    ██║██╔════╝██║     ██╔══██╗\n");
-    printf("      ███████║██║ █╗ ██║██║     ██║     ██║  ██║\n");
-    printf("      ██╔══██║██║███╗██║██║     ██║     ██║  ██║\n");
-    printf("      ██║  ██║╚███╔███╔╝╚██████╗███████╗██████╔╝\n");
-    printf("      ╚═╝  ╚═╝ ╚══╝╚══╝  ╚═════╝╚══════╝╚═════╝ \n");
+    
+    // Logo com degradê usando suas cores definidas
+    printf("%s%s       █████╗ %s ██╗    ██╗ %s ██████╗██╗     %s ██████╗ \n" RESET, 
+          BOLD, RED, YELLOW, GREEN, BLUE);
+    printf("%s%s      ██╔══██╗%s ██║    ██║%s ██╔════╝██║     %s ██╔══██╗\n" RESET,
+          BOLD, RED, YELLOW, GREEN, BLUE);
+    printf("%s%s      ███████║%s ██║ █╗ ██║%s ██║     ██║     %s ██║  ██║\n" RESET,
+          BOLD, RED, YELLOW, GREEN, BLUE);
+    printf("%s%s      ██╔══██║%s ██║███╗██║%s ██║     ██║     %s ██║  ██║\n" RESET,
+          BOLD, RED, YELLOW, GREEN, BLUE);
+    printf("%s%s      ██║  ██║%s ╚███╔███╔╝%s ╚██████╗███████╗%s ███████║\n" RESET,
+          BOLD, RED, YELLOW, GREEN, BLUE);
+    printf("%s%s      ╚═╝  ╚═╝ %s ╚══╝╚══╝ %s ╚═════╝╚══════╝%s ╚══════╝\n" RESET,
+          BOLD, RED, YELLOW, GREEN, BLUE);
     printf("\n");
     
+    // Barra de progresso colorida
     printf("        ");
     for(int i = 0; i < 30; i++) {
-        printf("▓");
+        // Alterna entre cores para a barra de progresso
+        if(i < 5) printf("%s▓" RESET, RED);
+        else if(i < 10) printf("%s▓" RESET, YELLOW);
+        else if(i < 15) printf("%s▓" RESET, GREEN);
+        else if(i < 20) printf("%s▓" RESET, BLUE);
+        else if(i < 25) printf("%s▓" RESET, MAGENTA);
+        else printf("%s▓" RESET, CYAN);
+        
         fflush(stdout);
         usleep(50000 + rand() % 100000);
     }
     
-    printf("\n\n                Bem Vindo!\n");
+    // Mensagem de boas-vindas
+    printf("\n\n%s%s                Bem Vindo!\n" RESET, BOLD, GREEN);
     sleep(1);
     clearScreen();
 };
